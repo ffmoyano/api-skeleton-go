@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"runtime"
 )
 
 var err error
@@ -28,16 +29,16 @@ func CloseLogs() {
 	}
 }
 
-func Error(message string, args ...any) {
-	write(fmt.Sprintf(message, args), 0)
+func Error(message string) {
+	write(newMessage(message), 0)
 }
 
 func Info(message string, args ...any) {
 	write(fmt.Sprintf(message, args), 2)
 }
 
-func Warn(message string, args ...any) {
-	write(fmt.Sprintf(message, args), 1)
+func Warn(message string) {
+	write(newMessage(message), 1)
 }
 
 func write(message string, level int) {
@@ -47,4 +48,9 @@ func write(message string, level int) {
 			logger.log.Print(message)
 		}
 	}
+}
+
+func newMessage(message string) string {
+	_, file, line, _ := runtime.Caller(2)
+	return fmt.Sprintf("[%s][%d] : %s", file, line, message)
 }

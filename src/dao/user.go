@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"notas/src/database"
 	"notas/src/entity"
+	"notas/src/logger"
 )
 
 var err error
@@ -11,53 +12,33 @@ var err error
 func GetUsers() ([]entity.User, error) {
 	db := database.Get()
 	var users []entity.User
-	var result *sql.Rows
-	var innerResult *sql.Rows
+	var rows *sql.Rows
 
-	// queries to the database
-	result, err = db.Query(
+	rows, err = db.Query(
 		"Select id, name, email, created_at from user where verified = 1")
 	if err != nil {
+		logger.Error(err.Error())
 		return users, err
 	}
 
-	for result.Next() {
+	for rows.Next() {
 		var user entity.User
-		var roles []entity.Role
-		err = result.Scan(&user.Id, &user.Name, &user.Email, &user.CreatedAt)
+		err = rows.Scan(&user.Id, &user.Name, &user.Email, &user.CreatedAt)
 		if err != nil {
+			logger.Error(err.Error())
 			return users, err
 		}
 
-		innerResult, err = db.Query(
-			"select r.id, r.name from role r inner join user_role ur on r.id = ur.role_id where ur.user_id = ?",
-			user.Id)
+		user.Roles, err = GetRolesByUser(user)
 		if err != nil {
 			return users, err
 		}
-
-		for innerResult.Next() {
-			var role entity.Role
-			err = innerResult.Scan(&role.Id, &role.Name)
-			if err != nil {
-				return users, err
-			}
-			roles = append(roles, role)
-		}
-		user.Roles = roles
 		users = append(users, user)
 	}
 
-	if innerResult != nil {
-		if err = innerResult.Close(); err != nil {
-			return users, err
-		}
-	}
-
-	if result != nil {
-		if err = result.Close(); err != nil {
-			return users, err
-		}
+	err = rows.Close()
+	if err != nil {
+		logger.Warn(err.Error())
 	}
 
 	return users, nil

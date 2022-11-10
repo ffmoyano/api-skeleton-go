@@ -3,7 +3,7 @@ package database
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
-	"log"
+	"notas/src/logger"
 	"os"
 	"time"
 )
@@ -16,7 +16,7 @@ func Open() {
 	connString := os.Getenv("dburl")
 	db, err = sql.Open(driver, connString)
 	if err != nil {
-		log.Fatal(err)
+		logger.Error(err.Error())
 	}
 	db.SetMaxOpenConns(20)
 	db.SetMaxIdleConns(20)

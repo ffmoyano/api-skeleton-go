@@ -18,12 +18,12 @@ func main() {
 
 	defer logger.CloseLogs()
 
-	server := server.Get()
+	app := server.Get()
 
 	logger.Info("Opening server at port: %s", os.Getenv("port"))
-	err := server.ListenAndServe()
+	err := app.ListenAndServe()
 	if err != nil {
-		logger.Error("Couldn't start server:  %s")
+		logger.Error(err.Error())
 		os.Exit(1)
 	}
 

@@ -1,8 +1,8 @@
-package handler
+package httpHandler
 
 import (
 	"net/http"
-	response2 "notas/src/response"
+	"notas/src/responseWriter"
 )
 
 type response map[string]string
@@ -12,7 +12,7 @@ func Get(next http.HandlerFunc) http.HandlerFunc {
 }
 
 func Post(next http.HandlerFunc) http.HandlerFunc {
-	return writeResponse(next, "PUT")
+	return writeResponse(next, "POST")
 }
 
 func writeResponse(handlerFunc http.HandlerFunc, method string) http.HandlerFunc {
@@ -20,7 +20,7 @@ func writeResponse(handlerFunc http.HandlerFunc, method string) http.HandlerFunc
 		if request.Method == method {
 			handlerFunc.ServeHTTP(writer, request)
 		} else {
-			response2.Response(writer, http.StatusMethodNotAllowed, response{"Error": "Method " + request.Method + " not allowed."})
+			responseWriter.Response(writer, http.StatusMethodNotAllowed, response{"Error": "Method " + request.Method + " not allowed."})
 		}
 	}
 }

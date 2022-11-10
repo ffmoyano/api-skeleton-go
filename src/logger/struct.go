@@ -19,10 +19,10 @@ type logger struct {
 
 // when we call a log of level x all logs with level >= x are also called
 var loggers = []logger{
-	logger{file: new(os.File), level: 2, log: new(log.Logger), name: "infolog", prefix: "INFO "},
-	logger{file: new(os.File), level: 1, log: new(log.Logger), name: "warnlog", prefix: "WARN "},
-	logger{file: new(os.File), level: 0, log: new(log.Logger), name: "errorlog", prefix: "ERROR "},
-	logger{file: nil, level: 999, log: new(log.Logger), name: "consolelog", prefix: ""},
+	{file: new(os.File), level: 2, log: new(log.Logger), name: "infolog", prefix: "INFO "},
+	{file: new(os.File), level: 1, log: new(log.Logger), name: "warnlog", prefix: "WARN "},
+	{file: new(os.File), level: 0, log: new(log.Logger), name: "errorlog", prefix: "ERROR "},
+	{file: nil, level: 999, log: new(log.Logger), name: "consolelog", prefix: ""},
 }
 
 func (logger logger) Close() {
@@ -41,7 +41,7 @@ func (logger logger) Open() logger {
 		logger.log = log.New(logger.file, logger.prefix, log.Ldate|log.Ltime|log.Lshortfile)
 
 	} else { // console log has no file associated
-		logger.log = log.New(os.Stdout, "", log.Ldate|log.Ltime|log.Lshortfile)
+		logger.log = log.New(os.Stdout, "", log.LstdFlags)
 	}
 	return logger
 }
