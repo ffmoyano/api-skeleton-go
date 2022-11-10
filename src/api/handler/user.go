@@ -1,10 +1,9 @@
-package route
+package handler
 
 import (
 	"fmt"
 	"net/http"
 
-	"notas/src/api/handler"
 	"notas/src/internal/service"
 )
 
@@ -20,7 +19,7 @@ func (h *UserHandler) ServeHTTP(writer http.ResponseWriter, request *http.Reques
 		insertUser(writer, request)
 		return
 	default:
-		handler.Response(writer, http.StatusMethodNotAllowed, payload{"Error": "Method " + request.Method + " not allowed."})
+		Response(writer, http.StatusMethodNotAllowed, payload{"Error": "Method " + request.Method + " not allowed."})
 		return
 	}
 }
@@ -28,10 +27,10 @@ func (h *UserHandler) ServeHTTP(writer http.ResponseWriter, request *http.Reques
 func getUsers(writer http.ResponseWriter, _ *http.Request) {
 	users, err := service.GetUsers()
 	if err != nil {
-		handler.Response(writer, http.StatusInternalServerError,
+		Response(writer, http.StatusInternalServerError,
 			payload{"Error": "Ha ocurrido un error al tratar de recuperar los usuarios"})
 	} else {
-		handler.Response(writer, http.StatusOK, users)
+		Response(writer, http.StatusOK, users)
 	}
 }
 

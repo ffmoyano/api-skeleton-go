@@ -1,3 +1,3 @@
-package route
+package handler
 
 type payload map[string]string
