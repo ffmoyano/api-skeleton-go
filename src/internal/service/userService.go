@@ -1,13 +1,13 @@
 package service
 
 import (
-	"notas/src/dao"
-	"notas/src/dto"
-	"notas/src/entity"
+	"notas/src/database"
+	"notas/src/model/dto"
+	"notas/src/model/entity"
 )
 
 func GetUsers() ([]dto.User, error) {
-	users, err := dao.GetUsers()
+	users, err := database.GetUsers()
 	if err != nil {
 		return []dto.User{}, err
 	}

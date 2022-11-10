@@ -1,7 +1,7 @@
 package entity
 
 import (
-	"notas/src/dto"
+	dto2 "notas/src/model/dto"
 	"time"
 )
 
@@ -15,12 +15,12 @@ type User struct {
 	Verified  bool
 }
 
-func (user User) ToDto() dto.User {
-	var rolesDto []dto.Role
+func (user User) ToDto() dto2.User {
+	var rolesDto []dto2.Role
 	for _, role := range user.Roles {
 		rolesDto = append(rolesDto, role.ToDto())
 	}
-	return dto.User{
+	return dto2.User{
 		Id:        user.Id,
 		Name:      user.Name,
 		Email:     user.Email,

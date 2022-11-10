@@ -1,15 +1,15 @@
 package main
 
 import (
+	"notas/src/api/server"
 	"notas/src/database"
-	"notas/src/dotenv"
-	"notas/src/logger"
-	"notas/src/server"
+	"notas/src/internal/env"
+	"notas/src/internal/logger"
 	"os"
 )
 
 func init() {
-	dotenv.Read(".env")
+	env.Read(".env")
 	logger.OpenLogs()
 	database.Open()
 }
@@ -20,7 +20,7 @@ func main() {
 
 	app := server.Get()
 
-	logger.Info("Opening server at port: %s", os.Getenv("port"))
+	logger.Info("Opening api at port: %s", os.Getenv("port"))
 	err := app.ListenAndServe()
 	if err != nil {
 		logger.Error(err.Error())

@@ -1,6 +1,8 @@
 package entity
 
-import "notas/src/dto"
+import (
+	"notas/src/model/dto"
+)
 
 type Role struct {
 	Id   int

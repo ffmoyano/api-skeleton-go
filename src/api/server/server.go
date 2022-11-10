@@ -2,7 +2,7 @@ package server
 
 import (
 	"net/http"
-	"notas/src/httpHandler"
+	"notas/src/api/handler"
 	"os"
 	"time"
 )
@@ -10,7 +10,7 @@ import (
 func Get() *http.Server {
 	port := os.Getenv("port")
 	mux := http.NewServeMux()
-	httpHandler.SetHandlers(mux)
+	handler.SetHandlers(mux)
 
 	server := &http.Server{
 		Addr:         port,

@@ -1,16 +1,15 @@
-package dao
+package database
 
 import (
 	"database/sql"
-	"notas/src/database"
-	"notas/src/entity"
-	"notas/src/logger"
+	"notas/src/internal/logger"
+	"notas/src/model/entity"
 )
 
 var err error
 
 func GetUsers() ([]entity.User, error) {
-	db := database.Get()
+
 	var users []entity.User
 	var rows *sql.Rows
 

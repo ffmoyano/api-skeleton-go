@@ -1,15 +1,13 @@
-package dao
+package database
 
 import (
 	"database/sql"
-	"notas/src/database"
-	"notas/src/entity"
-	"notas/src/logger"
+	"notas/src/internal/logger"
+	entity2 "notas/src/model/entity"
 )
 
-func GetRolesByUser(user entity.User) ([]entity.Role, error) {
-	db := database.Get()
-	var roles []entity.Role
+func GetRolesByUser(user entity2.User) ([]entity2.Role, error) {
+	var roles []entity2.Role
 	var rows *sql.Rows
 
 	rows, err = db.Query(
@@ -20,7 +18,7 @@ func GetRolesByUser(user entity.User) ([]entity.Role, error) {
 		return roles, err
 	}
 	for rows.Next() {
-		var role entity.Role
+		var role entity2.Role
 		err = rows.Scan(&role.Id, &role.Name)
 		if err != nil {
 			logger.Error(err.Error())

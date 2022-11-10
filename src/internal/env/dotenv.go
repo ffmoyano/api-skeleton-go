@@ -1,4 +1,4 @@
-package dotenv
+package env
 
 import (
 	"bufio"
@@ -19,7 +19,7 @@ func Read(path string) {
 		if validateLine(scanner.Text()) {
 			pairKeyValue := strings.SplitN(scanner.Text(), "=", 2)
 			if len(pairKeyValue) == 2 {
-				os.Setenv(strings.Trim(pairKeyValue[0], " "),
+				err = os.Setenv(strings.Trim(pairKeyValue[0], " "),
 					strings.Trim(pairKeyValue[1], " "))
 				if err != nil {
 					log.Fatalf("Error reading environment variable file: %s", err)
@@ -28,7 +28,7 @@ func Read(path string) {
 		}
 	}
 
-	file.Close()
+	err = file.Close()
 	if err != nil {
 		log.Fatalf("Error closing environment variable file: %s", err)
 	}
