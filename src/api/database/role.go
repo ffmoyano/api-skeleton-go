@@ -2,12 +2,12 @@ package database
 
 import (
 	"database/sql"
+	"notas/src/api/entity"
 	"notas/src/internal/logger"
-	entity2 "notas/src/model/entity"
 )
 
-func GetRolesByUser(user entity2.User) ([]entity2.Role, error) {
-	var roles []entity2.Role
+func GetRolesByUser(user entity.User) ([]entity.Role, error) {
+	var roles []entity.Role
 	var rows *sql.Rows
 
 	rows, err = db.Query(
@@ -18,7 +18,7 @@ func GetRolesByUser(user entity2.User) ([]entity2.Role, error) {
 		return roles, err
 	}
 	for rows.Next() {
-		var role entity2.Role
+		var role entity.Role
 		err = rows.Scan(&role.Id, &role.Name)
 		if err != nil {
 			logger.Error(err.Error())

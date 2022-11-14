@@ -2,8 +2,8 @@ package database
 
 import (
 	"database/sql"
+	"notas/src/api/entity"
 	"notas/src/internal/logger"
-	"notas/src/model/entity"
 )
 
 var err error

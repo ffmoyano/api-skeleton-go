@@ -1,4 +1,4 @@
-package handler
+package reply
 
 import (
 	"encoding/json"
@@ -6,8 +6,7 @@ import (
 	"notas/src/internal/logger"
 )
 
-// Response sets headers and sends the responseWriter with the result of the dbPool query as a json
-func Response(writer http.ResponseWriter, statusCode int, payload interface{}) {
+func Send(writer http.ResponseWriter, statusCode int, payload interface{}) {
 	response, err := json.Marshal(payload)
 	if err != nil {
 		logger.Error(err.Error())

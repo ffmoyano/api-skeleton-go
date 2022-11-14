@@ -1,8 +1,8 @@
 package main
 
 import (
+	"notas/src/api/database"
 	"notas/src/api/server"
-	"notas/src/database"
 	"notas/src/internal/env"
 	"notas/src/internal/logger"
 	"os"

@@ -1,39 +1,49 @@
 package handler
 
 import (
-	"fmt"
+	"encoding/json"
 	"net/http"
-
-	"notas/src/internal/service"
+	"notas/src/api/database"
+	"notas/src/api/entity"
+	"notas/src/api/reply"
+	"notas/src/internal/logger"
 )
 
 type UserHandler struct {
 }
 
-func (h *UserHandler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
+func (handler *UserHandler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	switch {
 	case request.Method == http.MethodGet:
-		getUsers(writer, request)
+		handler.get(writer, request)
 		return
 	case request.Method == http.MethodPost:
-		insertUser(writer, request)
+		handler.insert(writer, request)
 		return
 	default:
-		Response(writer, http.StatusMethodNotAllowed, payload{"Error": "Method " + request.Method + " not allowed."})
+		reply.Send(writer, http.StatusMethodNotAllowed, map[string]string{"Error": "Method " + request.Method + " not allowed."})
 		return
 	}
 }
 
-func getUsers(writer http.ResponseWriter, _ *http.Request) {
-	users, err := service.GetUsers()
+func (handler *UserHandler) get(writer http.ResponseWriter, _ *http.Request) {
+	users, err := database.GetUsers()
 	if err != nil {
-		Response(writer, http.StatusInternalServerError,
-			payload{"Error": "Ha ocurrido un error al tratar de recuperar los usuarios"})
+		reply.Send(writer, http.StatusInternalServerError,
+			map[string]string{"Error": "Ha ocurrido un error al tratar de recuperar los usuarios"})
 	} else {
-		Response(writer, http.StatusOK, users)
+		reply.Send(writer, http.StatusOK, users)
 	}
 }
 
-func insertUser(_ http.ResponseWriter, _ *http.Request) {
-	fmt.Println("insert user placeholder")
+func (handler *UserHandler) insert(writer http.ResponseWriter, request *http.Request) {
+
+	var user entity.User
+	err := json.NewDecoder(request.Body).Decode(&user)
+	if err != nil {
+		logger.Error(err.Error())
+		reply.Send(writer, http.StatusInternalServerError,
+			map[string]string{"Error": "Ha ocurrido un error al tratar de insertar el usuario"})
+	}
+
 }

@@ -1,4 +1,4 @@
-package dto
+package entity
 
 type Role struct {
 	Id   int    `json:"id"`
