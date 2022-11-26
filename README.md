@@ -1,5 +1,5 @@
-simple note taking app
+crud with jwt and mariadb
 
-**Backend:** Rest API in Go  
+**Backend:** Go
 **Persistence:** MariaDB No ORM  
 **Auth:** JWT
