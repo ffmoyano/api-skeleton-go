@@ -12,9 +12,6 @@ import (
 type UserHandler struct {
 }
 
-type ProtectedHandler struct {
-}
-
 func (handler *UserHandler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	switch {
 	case request.Method == http.MethodGet:

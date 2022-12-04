@@ -1,5 +1,4 @@
-crud with jwt and mariadb
+rest api skeleton in go
 
 **Backend:** Go
-**Persistence:** MariaDB No ORM  
-**Auth:** JWT
+**Persistence:** MariaDB No ORM
