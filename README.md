@@ -12,7 +12,7 @@ and the following packages:
 
 * api:
     - database: database initialization and query methods
-    - entity: objects used both as dto and db entities
+    - entity: structs used both as dto and db entities
     - handler: methods that are called by the multiplex and produce a response to the client
     - reply: function that parses to json the response and adds headers to it
     - server : contains both the implementation of the server and the multiplex which manages endpoints
