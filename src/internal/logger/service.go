@@ -54,7 +54,7 @@ func (logger logger) open() logger {
 		logger.file, err = os.OpenFile(fmt.Sprintf("logs/%s_%s.log", logger.name, timeFormat),
 			os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 
-		logger.log = log.New(logger.file, logger.prefix, log.Ldate|log.Ltime|log.Lshortfile)
+		logger.log = log.New(logger.file, logger.prefix, log.Ldate|log.Ltime)
 
 	} else { // console log has no file associated
 		logger.log = log.New(os.Stdout, "", log.LstdFlags)
@@ -63,10 +63,18 @@ func (logger logger) open() logger {
 }
 
 func write(message string, level int) {
-
+	var prefix string
 	for _, logger := range loggers {
 		if logger.level >= level {
-			logger.log.Print(message)
+			switch level {
+			case 0:
+				prefix = "[ERROR]"
+			case 1:
+				prefix = "[WARN]"
+			case 2:
+				prefix = "[INFO]"
+			}
+			logger.log.Print(prefix + " " + message)
 		}
 	}
 }
