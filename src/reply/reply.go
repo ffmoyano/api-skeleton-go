@@ -2,8 +2,8 @@ package reply
 
 import (
 	"encoding/json"
+	"github.com/ffmoyano/gofer/logger"
 	"net/http"
-	"notas/src/internal/logger"
 )
 
 func Send(writer http.ResponseWriter, statusCode int, payload interface{}) {

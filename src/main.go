@@ -1,16 +1,16 @@
 package main
 
 import (
-	"notas/src/api/database"
-	"notas/src/api/server"
-	"notas/src/internal/env"
-	"notas/src/internal/logger"
+	"github.com/ffmoyano/gofer/env"
+	"github.com/ffmoyano/gofer/logger"
 	"os"
+	"rest-skeleton-go/src/database"
+	"rest-skeleton-go/src/server"
 )
 
 func init() {
 	env.Read(".env")
-	logger.OpenLogs()
+	logger.OpenLogs("/")
 	database.Open()
 }
 

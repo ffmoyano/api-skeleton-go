@@ -2,11 +2,11 @@ package handler
 
 import (
 	"encoding/json"
+	"github.com/ffmoyano/gofer/logger"
 	"net/http"
-	"notas/src/api/database"
-	"notas/src/api/entity"
-	"notas/src/api/reply"
-	"notas/src/internal/logger"
+	"rest-skeleton-go/src/database"
+	"rest-skeleton-go/src/entity"
+	"rest-skeleton-go/src/reply"
 )
 
 type UserHandler struct {

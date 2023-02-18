@@ -2,7 +2,7 @@ package server
 
 import (
 	"net/http"
-	"notas/src/api/handler"
+	"rest-skeleton-go/src/handler"
 )
 
 func SetHandlers(mux *http.ServeMux) {

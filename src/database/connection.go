@@ -2,8 +2,8 @@ package database
 
 import (
 	"database/sql"
+	"github.com/ffmoyano/gofer/logger"
 	_ "github.com/go-sql-driver/mysql"
-	"notas/src/internal/logger"
 	"os"
 	"time"
 )
@@ -13,7 +13,7 @@ var db *sql.DB
 func Open() {
 	var err error
 	driver := os.Getenv("dbDriver")
-	connString := os.Getenv("dburl")
+	connString := os.Getenv("dbUrl")
 	db, err = sql.Open(driver, connString)
 	if err != nil {
 		logger.Error(err.Error())
