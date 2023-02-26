@@ -1,0 +1,7 @@
+github.com/ffmoyano/gofer v0.0.0-20230218123953-d06c5517c06f h1:wWf6s//sGtuor0/NRa/7Z+MSAh2xvrN3R+26XYFF2pY=
+github.com/ffmoyano/gofer v0.0.0-20230218123953-d06c5517c06f/go.mod h1:zLhJMV4rj9LjQX6v6wtcIYaXq0uNOaUjOyI1E3MLoAE=
+github.com/go-sql-driver/mysql v1.7.0 h1:ueSltNNllEqE3qcWBTD0iQd3IpL/6U+mJxLkazJ7YPc=
+github.com/go-sql-driver/mysql v1.7.0/go.mod h1:OXbVy3sEdcQ2Doequ6Z5BW6fXNQTmx+9S1MCJN5yJMI=
+golang.org/x/crypto v0.3.0/go.mod h1:hebNnKkNXi2UzZN1eVRvBB7co0a+JxK6XbPiWVs/3J4=
+golang.org/x/crypto v0.6.0 h1:qfktjS5LUO+fFKeJXZ+ikTRijMmljikvG68fpMMruSc=
+golang.org/x/crypto v0.6.0/go.mod h1:OFC/31mSvZgRz0V1QTNCzfAI1aIRzbiufJtkMIlEp58=
